@@ -2,7 +2,8 @@ const webpack = require('webpack')
 const path = require('path')
 const merge = require('webpack-merge')
 const webpackConfig = require('./webpack.config')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+// const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 // 粉笔
 const chalk = require('chalk')
 // loading效果
@@ -46,28 +47,28 @@ const config = merge(webpackConfig, {
           'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
       }
     }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[contenthash].css',
+      chunkFilename: 'css/[contenthash].css'
+    }),
     new webpack.LoaderOptionsPlugin({
       minimize: true,
       debug: false
     }),
     // 根据模块调用次数，给模块分配ids，常被调用的ids分配更短的id，使得ids可预测，降低文件大小
     new webpack.optimize.OccurrenceOrderPlugin()
-    // 文件压缩
-    // new webpack.optimize.UglifyJsPlugin({
-    //   sourceMap: true,
-    //   comments: false,
-    //   ie8: true
-    // })
   ],
   devtool: 'source-map',
   module: {
     rules: [
       {
-        test: /\.(css)$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ["css-loader", "stylus-loader"]
-        })
+        test: /\.(styl|css)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          { loader: 'postcss-loader', options: { sourceMap: false } },
+          { loader: 'stylus-loader', options: { sourceMap: false } }
+        ]
       }
     ]
   }

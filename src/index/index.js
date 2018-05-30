@@ -8,27 +8,47 @@ const addFly = canFly => target => {
 
 const decorateArmour = (target, key, descriptor) => {
   const method = descriptor.value
-  let moreDef = 100
-  let ret
   descriptor.value = (...args) => {
-    args[0] += moreDef
-    ret = method.apply(target, args)
-    return ret
+    args[0] += 100
+    return method.apply(target, args)
+  }
+  return descriptor
+}
+
+const hi = () => {
+  console.log('hi:')
+}
+
+const add10 = num => (target, key, descriptor) => {
+  const method = descriptor.value
+  descriptor.value = (...args) => {
+    args.push(10)
+    return method.apply(target, args)
   }
   return descriptor
 }
 
 @addFly(true)
-class Man{
+class Man {
   constructor (def = 2, atk = 3, hp = 3) {
     this.init(def, atk, hp)
   }
 
   @decorateArmour
-  init(def, atk, hp){
-    this.def = def // 防御值
-    this.atk = atk  // 攻击力
-    this.hp = hp  // 血量
+  init (def, atk, hp) {
+    this.def = def
+    this.atk = atk
+    this.hp = hp
+  }
+
+  @hi
+  say () {
+    console.log('come on baby')
+  }
+
+  @add10(10)
+  add (...args) {
+    return args.reduce((a, b) => a + b)
   }
 
   toString () {
@@ -37,6 +57,8 @@ class Man{
 }
 
 const tony = new Man()
+tony.say()
+console.log(tony.add(1, 2))
 
 console.log(`当前状态 ===> ${tony}`)
 

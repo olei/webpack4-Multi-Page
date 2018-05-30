@@ -36,10 +36,15 @@
     "extract-text-webpack-plugin": "^3.0.2",
     "html-webpack-plugin": "^3.2.0",
     "http-proxy-middleware": "^0.18.0",
+    "mini-css-extract-plugin": "^0.4.0",
     "ora": "^2.1.0",
+    "postcss": "^6.0.22",
+    "postcss-loader": "^2.1.5",
+    "ramda": "^0.25.0",
     "shelljs": "^0.8.2",
     "source-map-loader": "^0.2.3",
     "style-loader": "^0.21.0",
+    "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "url-loader": "^1.0.1",
     "webpack": "^4.8.3",
@@ -50,6 +55,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "fastclick": "^1.0.6"
+    "fastclick": "^1.0.6",
+    "jquery": "^3.3.1"
   }
 }

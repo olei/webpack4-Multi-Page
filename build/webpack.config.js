@@ -4,8 +4,19 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const templateList = require('./templateList')
 
 const NODE_BUILD = process.env.NODE_BUILD || ''
-let entry = {}
-let plugins = []
+let entry = {
+  common: [
+    './src/styles/reset.styl',
+    './src/styles/index.styl'
+  ]
+}
+let plugins = [
+  new webpack.ProvidePlugin({
+    $: 'jquery',
+    jQuery: 'jquery',
+    'window.jQuery': 'jquery'
+  })
+]
 
 if (NODE_BUILD) {
   if (!templateList[NODE_BUILD]) {

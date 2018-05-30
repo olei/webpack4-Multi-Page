@@ -17,7 +17,7 @@ module.exports = merge(webpackConfig, {
   module: {
     rules: [
       {
-        test: /\.(css)$/,
+        test: /\.(css|styl)$/,
         use: ["style-loader", "css-loader", "stylus-loader"]
       }
     ]

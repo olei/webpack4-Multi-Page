@@ -13,7 +13,7 @@ module.exports = {
     entry: './src/index/index.js',
     filename: './index.html',
     template: 'template/index/index.html',
-    chunks: ['index']
+    chunks: ['index', 'common', 'index']
   },
   list: {
     entry: './src/list/index.js',
