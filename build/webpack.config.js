@@ -5,8 +5,9 @@ const templateList = require('./templateList')
 
 const NODE_BUILD = process.env.NODE_BUILD || ''
 let entry = {
+  // css
   common: [
-    './src/styles/reset.styl',
+    // './src/styles/reset.styl',
     './src/styles/index.styl'
   ]
 }
@@ -18,6 +19,8 @@ let plugins = [
   })
 ]
 
+
+// 构建模板
 if (NODE_BUILD) {
   if (!templateList[NODE_BUILD]) {
     throw new Error('没有这个文件')
@@ -66,7 +69,7 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.(js|jsx)?$/,
-        loader: ['source-map-loader']
+        loader: ['source-map-loader', 'eslint-loader']
       },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
